@@ -1,1 +1,1 @@
-Ketua David
+Ketua David palkon
