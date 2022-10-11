@@ -1,10 +1,10 @@
 ## Member of group
 1. 2106657292 - Moza Adirafi Satria Jaka
-2. 2106656522 -  Muhammad Ghazian Gunawan  
-3. Nicolas Ananda 
-4. 2106657815 -  Raizaz Achmad Asyraf
-5. Jovian Marvin Chrisniady
-6. David Christianto
+2. 2106656522 - Muhammad Ghazian Gunawan  
+3. 2106720973 - Nicolas Ananda 
+4. 2106657815 - Raizaz Achmad Asyraf
+5. 2106720891 - Jovian Marvin Chrisniady
+6. 2106720866 - David Christianto
 
 ## Heroku Link
 https://g20care.herokuapp.com/
