@@ -1,5 +1,5 @@
 ## Member of group
-1. Moza Adirafi Djaka
+1. Moza Adirafi Satria Jaka
 2. Ghazian Gunawan Menawan (LEADER)
 3. Nicholas Ananda Suka (P)Keju
 4. Raizaz
