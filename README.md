@@ -16,4 +16,7 @@ Our group chose the theme of agriculture, we plan to make a web that helps farme
 1. Homepage 
 2. Account Registration and Farmland registration
 3. Farmland info (for obtaining Fertilizer type, Fertilizer dose, and .)
-
+4. News regarding agriculture
+5. Advertisements about the farmer's farm land.
+6. Reviews and rating regarding the farmers.
+7. Contact us page for filing complaints.
