@@ -15,7 +15,7 @@ Our group chose the theme of agriculture, we plan to make a web that helps farme
 ## List of Modules
 1. Homepage (NA)
 2. Account Registration and Farmland registration (Raizaz)
-3. Farmland info (for obtaining Fertilizer type, Fertilizer dose, and . (Jovian)
+3. Farmland info (for obtaining Fertilizer type, Fertilizer dose, and etc. (Jovian)
 4. News regarding agriculture (Moza)
 5. Advertisements about the farmer's farm land. (Ghazian)
 6. Reviews and rating regarding the farmers.
