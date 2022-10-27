@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Login</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="container">
+    <div class="row align-items-center vh-100">
+        <div class="col-6 mx-auto">
+            <div class="card" style="border-radius: 1rem;">
+                <img src="https://plasticseurope.org/wp-content/uploads/2021/10/5.6._aaheader.png" class="card-img-top" >
+                <div class="card-body">
+                    <h1>Login</h1>
+                    {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li style="color: red;">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Username</label>
+                            <input type="text" name="username" placeholder="Username" class="form-control">
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" name="password" placeholder="Password" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary" value="Login">Login</button>
+                    </form>
+                
+                </div>
+                <div class="card-footer">
+                    Don't have an account? <a href="{% url 'example_app:register' %}">Create Account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
