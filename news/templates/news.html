@@ -1,0 +1,495 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<style>
+*, *:before, *:after { 
+  box-sizing: border-box;
+}
+
+body {
+  background: #eee;
+  color: #191919;
+  font-family: 'Lato', sans-serif;
+}
+
+h1, h2 {
+  font-family: 'Fjalla One', sans-serif;
+  margin-top: 0;
+  text-transform: uppercase;
+}
+
+figure {
+  margin: 0;
+}
+
+figure img {
+  height: auto;
+  width: 100%;  
+}
+
+.wrapper {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 2fr;
+  grid-auto-rows: minmax(100px, auto);
+  margin: 24px;
+  max-width: 1000px;
+  position: relative;
+}
+
+.wrapper > * {
+  grid-column: 1 / span 2;
+}
+
+.header {
+  font-size: 1.5em;
+  grid-row: 1 / 2;
+}
+
+header:after {
+  background: rgba(55, 194, 50, 0.582);
+  content: "";
+  display: block;
+  height: 20px;
+  width: auto;
+}
+
+.article {
+  text-align: right;
+}
+
+.featured-image-1 {
+  grid-row: 2 / 3;
+}
+
+.number-1 {
+  grid-row: 2 / 4;
+}
+
+.featured-image-2, .number-2 {
+  grid-row: 4 / 5;
+}
+
+.number-1{
+  align-self: end;
+  color: rgba(55, 194, 50, 0.582);
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 480px;
+  line-height: 600px;
+  grid-column: 1 / 2;
+}
+
+.article-1, .article-4 {
+  grid-column: 2 / 3;
+}
+
+.featured-image-2, .number-2 {
+  align-self: end;
+}
+
+.number-2 {
+  color: #eee;
+  font-size: 200px;
+  justify-self: end;
+  line-height: 160px;
+}
+
+.number-3 {
+  background: black;
+  border-radius: 130px;
+  color: white;
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 100px;
+  height: 130px;
+  line-height: 130px;
+  position: absolute;
+  grid-row: 6 / 7;
+  right: -20px;
+  text-align: center;
+  top: -20px;
+  width: 130px;
+}
+
+.featured-image-3 img {
+  height: 100%;
+}
+
+.number-4 {
+  align-self: end;
+  color: rgba(55, 194, 50, 0.582);
+  font-family: 'Fjalla One', sans-serif;
+  line-height: 480px;
+  grid-column: 1 / 2; 
+  position: absolute;
+  transform:translate(30px,-90px)
+}
+
+.article-4 h2{
+    transform:translate(0,-90px)
+}
+.article-4 p{
+    transform:translate(0,-90px)
+}
+.article-4 a{
+    transform:translate(0,-90px)
+}
+
+@media (min-width: 600px) {
+  
+  .wrapper {
+    grid-template-columns: repeat(2, 1fr 2fr);
+    margin: 24px auto;
+  }
+  
+  .header {
+    grid-column: 3 / 5;
+    width: 70%;
+  }
+  
+  .featured-image-1 {
+    grid-row: 1 / 3;
+  }
+  
+  .article-1 {
+    grid-row: 3 / 4;
+  }
+  
+  .article-2 {
+    grid-column: 4 / 5;
+    grid-row: 4 / 5;
+  }
+  
+  .featured-image-2, .number-2 {
+    grid-column: 3 / 5;
+    grid-row: 2 / 4;
+  }
+
+  .featured-image-3, .number-3 {
+    grid-row: 4 / 6;
+  }
+  
+  .featured-image-4, .number-4 {
+    grid-column: 3 / 5;
+    grid-row: 5 / 6;
+  }
+  
+  .number-4 {
+    font-size: 250px;
+    grid-row: 5 / 7;
+  }
+  
+  .article-3, .article-4 {
+    grid-row: 6 / 7;
+  }
+  
+  .article-4 {
+    grid-column: 4 / 5;
+  }
+
+
+  .button-9 {
+  backface-visibility: hidden;
+  background-color: rgba(55, 194, 50, 0.582);
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+  font-size: 100%;
+  height: 80px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+}
+
+.button-9:disabled {
+  cursor: default;
+}
+
+.button-9:focus {
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+}
+}
+
+.container {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	margin: 40px 0;
+}
+
+.container .card {
+	position: relative;
+	width: 300px;
+	height: 400px;
+	background: rgba(24, 158, 42, 0.699);
+	margin: 20px;
+	box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+	border-radius: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	backdrop-filter: blur(10px);
+}
+
+
+.container .card .content {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	transition: 0.5s;
+}
+
+.container .card:hover .content {
+	transform: translateY(-20px);
+}
+
+.container .card .content .contentBx h3 {
+	color: #fff;
+
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: 500;
+	font-size: 18px;
+	text-align: center;
+	margin: 20px 0 10px;
+	line-height: 1.1em;
+    
+}
+
+.container .card .content .contentBx h3 span {
+	font-size: 12px;
+	font-weight: 300;
+	text-transform: initial;
+    overflow-wrap: break-word;
+}
+
+.review {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px; 
+  transform: translate(140px,0);
+}
+
+img:hover{
+  opacity: 0.3;
+}
+
+.button-25 {
+  background-color: #ce3b3b;
+  background-image: linear-gradient(#d35747, #b63616);
+  border: 1px solid #2A8387;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: block;
+  font-family: -apple-system,".SFNSDisplay-Regular","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 17px;
+  line-height: 100%;
+  margin: 0;
+  outline: 0;
+  padding: 11px 15px 12px;
+  text-align: center;
+  transition: box-shadow .05s ease-in-out,opacity .05s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+}
+
+.button-25:hover {
+  box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, rgba(0, 0, 0, 0.4) 0 1px 2px;
+  text-decoration: none;
+  transition-duration: .15s, .15s;
+}
+
+.button-25:active {
+  box-shadow: rgba(0, 0, 0, 0.15) 0 2px 4px inset, rgba(0, 0, 0, 0.4) 0 1px 1px;
+}
+
+.button-25:disabled {
+  cursor: not-allowed;
+  opacity: .6;
+}
+
+.button-25:disabled:active {
+  pointer-events: none;
+}
+
+.button-25:disabled:hover {
+  box-shadow: none;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  function getfeedback() {
+    console.log();
+      $.ajax({
+          type: "GET",
+          url: "/news/get/" 
+      }).done((data) => {
+          console.log()
+          showfeedback(data)
+      });
+  }
+
+  function showfeedback(feedback) {
+    const table = $('.review');
+    table.empty();
+    feedback.forEach(item => {
+      const data = `
+      <div class="container">
+            <div class="card-body">   
+            <div class="card" style="background-color:rgba(24, 158, 42, 0.699);">
+                <div class="content">
+
+ 					<div class="contentBx">
+						<h3>${item.fields.review}<br><span>${item.fields.name}</span><br><span>${item.fields.date}</span></h3>
+            <input type="submit" value="delete"  class="button-25" onclick=delete_task(${item.pk})>
+					</div>
+				</div>
+        </div>
+    </div>`;
+      table.append(data);
+    })
+  }
+
+  function addfeedback() {
+    console.log();
+    const form = $('.create_feedback');
+    $.ajax({
+        type: "POST",
+        url: "/news/add/",
+        data: form.serialize(),
+        error: console.log("error"), 
+    }).done(function (data) {
+        console.log();
+        form.trigger("reset");
+        getfeedback();
+    })
+    $("#staticBackdrop").modal("hide");
+  }
+
+  function delete_task(id) {
+        $.ajax({
+            type: "GET",
+            url: "/news/delete/" + id,
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
+        }).done((data) => {
+            getfeedback();
+        })
+
+
+    }
+
+
+</script>
+<div class="wrapper">
+    <header class="header"><h1>News About Agriculture</h1></header>
+    <figure class="featured-image-1">
+      <a href="https://blkbanyuwangi.kemnaker.go.id/indonesian-agriculture-will-make-indonesia-become-a-great-nation/">
+        <img src="https://images.pexels.com/photos/12382564/pexels-photo-12382564.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"></a>
+     </figure>
+    <div class="number-1">1</div>
+    <article class="article article-1">
+      <h2>Indonesian Agriculture Will Make a real Nation</h2>
+      <p>Rice terraces near Jatiluwih, Bali, Indonesia.
+Agriculture sector has an important role in  national economic development structure. We know that agriculture in Indonesia is very spacious and potential. </p>
+    <a href= "https://blkbanyuwangi.kemnaker.go.id/indonesian-agriculture-will-make-indonesia-become-a-great-nation/"><b>[read more]</b></a>
+    </article>
+
+
+    <figure class="featured-image-2">
+      <a href="https://www.indonesia-investments.com/culture/economy/general-economic-outline/agriculture/item378"> 
+        <img src="https://images.pexels.com/photos/5434985/pexels-photo-5434985.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" ></a>
+     </figure>
+    <div class="number-2">2</div>
+    <article class="article article-2">
+      <h2>Agricultural Sector of Indonesia</h2>
+      <p>With its vast and abundant fertile soils Indonesia is a major global key producer of a wide variety of agricultural tropical products, and although agriculture's share of the country's gross domestic product (GDP) has declined markedly during the last five decades.</p>
+      <a href= "https://www.indonesia-investments.com/culture/economy/general-economic-outline/agriculture/item378"><b>[read more]</b></a>
+    </article>
+
+
+    <figure class="featured-image-3">
+      <a href="https://www.statista.com/topics/7732/agriculture-industry-in-indonesia/"> 
+        <img src="https://images.pexels.com/photos/6914317/pexels-photo-6914317.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+        </a>
+     </figure>
+    <div class="number-3">3</div>
+    <article class="article article-3">
+      <h2>Agriculture industry in Indonesia</h2>
+      <p>Indonesia is one of the world's largest producers and exporters of agricultural products, supplying important commodities such as palm oil, natural rubber, cocoa, coffee, rice, and spices to the rest of the world. In the past decades, the agricultural industry is also the largest sector of employment in the country.</p>
+      <a href= "https://www.statista.com/topics/7732/agriculture-industry-in-indonesia/"><b>[read more]</b></a>
+    </article>
+
+
+    <figure class="featured-image-4">
+      <a href="https://www.adb.org/publications/summary-indonesias-agriculture-natural-resources-and-environment-sector-assessment">
+        <img src="https://images.pexels.com/photos/8332320/pexels-photo-8332320.jpeg?cs=srgb&dl=pexels-mikhail-nilov-8332320.jpg&fm=jpg">
+      </a>
+    </figure>
+    <div class="number-4">4</div>
+    <article class="article article-4">
+      <h2>Summary of Indonesia's Agriculture 4</h2>
+      <p>Despite increasing food crop production, food security is challenged in the medium term by declining irrigation and logistics chain infrastructure.</p>
+      <a href= "https://www.adb.org/publications/summary-indonesias-agriculture-natural-resources-and-environment-sector-assessment" ><b>[read more]</b></a>
+    </article>
+  </div>
+
+<button class="button-9" role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Press here if you have any reccomendation!</button>
+  <!-- <button type="button" class="raise addTaskButton" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="color:#ffffff ;">Add a review</button> -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Topics</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="create_feedback" method="POST">
+                {% csrf_token %}
+                <div class="form-floating responsive" style="padding-left:0.5%;margin-top: 2%;">
+                  <h5>Name: </h5>
+                  {{form.name}}
+                </div>
+                <div class="form-floating responsive" style="padding-left:0.5%;margin-top: 2%;">
+                  <h5>Reccomended topics: </h5>
+                  {{form.review}}
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="addfeedback()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+  <div>
+    <table class="review">
+      
+    </table>
+  </div>
+</body>
+
+{% endblock content %}

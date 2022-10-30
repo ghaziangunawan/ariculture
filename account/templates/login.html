@@ -23,11 +23,11 @@
                     <form method="POST" action="">
                         {% csrf_token %}
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Username</label>
+                            <label for="InputUsername" class="form-label">Username</label>
                             <input type="text" name="username" placeholder="Username" class="form-control">
                           </div>
                           <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <label for="InputPassword" class="form-label">Password</label>
                             <input type="password" name="password" placeholder="Password" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-primary" value="Login">Login</button>
@@ -35,7 +35,7 @@
                 
                 </div>
                 <div class="card-footer">
-                    Don't have an account? <a href="{% url 'homepage:register' %}">Create Account</a>
+                    Don't have an account? <a href="{% url 'account:register' %}">Create Account</a>
                 </div>
             </div>
         </div>

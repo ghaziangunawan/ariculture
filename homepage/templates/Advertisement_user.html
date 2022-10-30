@@ -1,25 +1,143 @@
 {% extends 'base.html' %}
-{% load static %}
+
 
 {% block content %}
-<body> 
-    <div class="container">
-        <div class = "row" style="margin-top: 40px ;">
-            <h2 style="text-align:center"> Hello {{username}} ! Here are your advertisements </h2>
-        </div>
-        <div class="row" style="margin-top: 60px;">
-            {% for item in list_item %}
-            <div class="col-sm" >
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                    <h5 class="card-title">{{item.title}}</h5>
-                    <p class="card-text">{{item.description}}</p>
-                    <button type="button" class="btn btn-warning"><a href="{% url 'homepage:set_remove' item.id %}"style="color:#ffffff; text-decoration: none;">Remove</a></button>
+<style>
+    h1 {
+        text-align: center;
+    }
+    .card:hover{
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+</style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#modal_submit").click(e => {
+                e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "{% url 'homepage:create_ad' %}",
+                headers: { "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value},
+                mode: "same-origin",
+                data: {
+                    title: $("#Ad_title").val(),
+                    description: $("#Ad_description").val(),
+                    ad_type: $("input[name='ad_type']:checked").val()
+                },
+            success: response => {
+                $("#create_form").trigger("reset");
+                $("#cardrow").prepend(create_card(response));
+            },
+        });
+    });
+
+    })
+        function create_card(Advertisement) {
+        if(Advertisement.fields.ad_type == "FARMLAND"){
+            return `
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="https://imageio.forbes.com/specials-images/imageserve/62be10f32ce37625d88bca9b/Tractor-spraying-pesticides-on-soybean-field--with-sprayer-at-spring/960x0.jpg?format=jpg&width=960" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">${Advertisement.fields.title}</h5>
+                    <p class="card-text">${Advertisement.fields.description}</p>
+                    <button type="button" class="btn btn-warning"><a href="set_remove/${Advertisement.pk} "style="color:#ffffff; text-decoration: none;">Remove</a></button>
                 </div>
             </div>
-            {% endfor %}
-            <button type="button" class="btn btn-primary"><a href="{% url 'homepage:create_advert' %}"style="color:#ffffff; text-decoration: none;">New Advertisement</a></button>
+        </div>
+        `
+
+        }
+        else{
+            return `
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="https://oxfarm.co.ke/wp-content/uploads/2018/10/Fresh-produce.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">${Advertisement.fields.title}</h5>
+                        <p class="card-text">${Advertisement.fields.description}</p>
+                        <button type="button" class="btn btn-warning"><a href="set_remove/${Advertisement.pk} "style="color:#ffffff; text-decoration: none;">Remove</a></button>
+                    </div>
+                </div>
+            </div>
+        `
+        }
+        
+    };
+            function Add_Advertisement() {
+                $.get("{% url 'homepage:show_json' %}", function(data) {
+                    $.each(data, function(i, value) {
+                    $("#cardrow").append(create_card(value));
+                    });
+                })
+            };
+
+            Add_Advertisement();
+    </script>
+
+
+
+    <div class="row" style="margin-bottom:70px;">
+        <h1>Hey {{username}}👋 Here are your advertisements !</h1>
+    </div>
+    <div class="row row-cols-md-3 g-4" id="cardrow" style="margin-left: 70px;"></div>
+    <div class="container my-3 bg-light" style="margin-top: 70px;">
+        <div class="col-md-12 text-center">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                New Advertisement
+            </button>
         </div>
     </div>
-</body>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create A New Advertisement</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="" id="create_form">
+                        {% csrf_token %}
+                        <div class="container">
+                            <div class="row mt-5 mb-2">
+                                <tr>
+                                <td>Advertisement Title</td>
+                                <td><input type="text" name="title" placeholder="Enter Task Title" class="form-control" id="Ad_title"></td>
+                                </tr>
+                                </div>   
+                                <div class="row mb-5">
+                                    <tr>
+                                    <td>Advertisement Description</td>
+                                    <td><input type="text" name="description" placeholder="Enter Task Description" class="form-control" id="Ad_description"></td>
+                                </tr>
+                                </div>
+                                <div class="row mb-5">
+                                    <p> 
+                                        <label><input type="radio" name="ad_type" value="FARMLAND">Farmland</label> 
+                                        <label><input type="radio" name="ad_type" value="PRODUCT">Product</label>
+                                    </p>
+                                </div>
+                                    
+
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="modal_submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
 {% endblock content %}

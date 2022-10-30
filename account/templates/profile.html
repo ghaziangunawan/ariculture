@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Profile</title>
+<style>
+    * {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+</style>
+{% endblock meta %}
+
+{% block content %}
+<body style="background-image: url(https://media.istockphoto.com/vectors/light-soft-green-triangular-geometric-background-vector-id906770278?k=20&m=906770278&s=612x612&w=0&h=n-VUXUTOIO_oVJelcijdt0jt8vsjlEdtfj3Oq5QDO0M=); background-repeat: no-repeat; background-size: cover;">
+    <div class="container" style="max-width: 95%;">
+        <div class="row">
+            <div class="col align-items-center">
+                <div class="row mt-4" style="color:black">
+                    <h1>Hello {{ first_name }}!</h1>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="card border-dark mt-3 mb-3">
+                            <div class="card-header" style="background-color: darkgreen;">
+                                <div class="row">
+                                    <div class="col align-self-center">
+                                        <h2 style="color: white;">Here are your farms!</h2>
+                                    </div>
+                                    <div class="col-1 align-self-center">
+                                        <a style="color: white;"href="{% url 'farmland:show_farmland' %}">Register Land</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% for land in land_item %}
+                            <div class="card-body text-dark" id="land">
+                                <h3 class="card-title"><u>{{ land.get_plant_display }} Farm</u></h3>
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-text" style="text-indent: 2%; ">Land Info</h5>
+                                        <ul>
+                                            <li>Land size: {{ land.size }} m<sup>2</sup></li>
+                                            <li>Amount of plants:  {{ land.amount_of_plants }} plants</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <h5 class="card-text" style="text-indent: 2%;">Fertilizer needed</h5>
+                                        <ul>
+                                            <li>Urea: {{ land.amount_of_u_needed }} kg</li>
+                                            <li>SP36: {{ land.amount_of_s_needed }} kg</li>
+                                            <li>KCl: {{ land.amount_of_k_needed }} kg</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <h5 class="card-text" style="text-indent: 2%;">Expectation</h5>
+                                        <ul>
+                                            <li>Yield: {{ land.expected_yield }} kg</li>
+                                            <li>Gross income: Rp {{ land.gross_income }}</li>
+                                            <li>Net income: Rp {{ land.net_income }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-warning"><a href="{% url 'account:remove_land' land.id %}"style="color:#ffffff; text-decoration: none;">Remove</a></button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row-1 mt-3">
+                    <a style="color: black;" href="{% url 'homepage:advertise' %}">Here are your Advertisements!</a> 
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% endblock content %}

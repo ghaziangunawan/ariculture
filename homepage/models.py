@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -7,4 +8,4 @@ class Advertisement(models.Model):
     date = models.TextField()
     title = models.TextField()
     description = models.TextField()
-
+    ad_type = models.TextField(default="FARMLAND")

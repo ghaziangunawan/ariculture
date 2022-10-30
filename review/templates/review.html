@@ -1,0 +1,358 @@
+<!--doctype html-->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Review</title>
+<style>
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: poppins;
+    box-sizing: border-box;
+}
+#btn-div{
+    display: flex;
+    justify-content: center;
+}
+a{
+    text-decoration: none;
+}
+#testimonials{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:100%;
+}
+.testimonial-heading{
+    letter-spacing: 1px;
+    margin: 30px 0px;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.testimonial-heading h1{
+    font-size: 2.2rem;
+    font-weight: 500;
+    background-color: #202020;
+    color: #ffffff;
+    padding: 10px 20px;
+}
+.testimonial-heading span{
+    font-size: 1.3rem;
+    color: #252525;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.testimonial-box-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width:100%;
+}
+.testimonial-box{
+    width:500px;
+    box-shadow: 2px 2px 30px rgba(0,0,0,0.1);
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 15px;
+    cursor: pointer;
+}
+.profile-img{
+    width:50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+.profile-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.profile{
+    display: flex;
+    align-items: center;
+}
+.name-user{
+    display: flex;
+    flex-direction: column;
+}
+.name-user strong{
+    color: #3d3d3d;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
+.name-user span{
+    color: #979797;
+    font-size: 0.8rem;
+}
+.reviews{
+    color: #f9d71c;
+}
+.box-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.client-comment p{
+    font-size: 0.9rem;
+    color: #4b4b4b;
+}
+.testimonial-box:hover{
+    transform: translateY(-10px);
+    transition: all ease 0.3s;
+}
+ 
+@media(max-width:1060px){
+    .testimonial-box{
+        width:45%;
+        padding: 10px;
+    }
+}
+@media(max-width:790px){
+    .testimonial-box{
+        width:100%;
+    }
+    .testimonial-heading h1{
+        font-size: 1.4rem;
+    }
+}
+@media(max-width:340px){
+    .box-top{
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+    .reviews{
+        margin-top: 10px;
+    }
+}
+::selection{
+    color: #ffffff;
+    background-color: #252525;
+}
+.rate {
+    float: left;
+    text-align: center;
+    font-size: 2em;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float: right;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    color:#ccc;
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #ffdc5c;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #ffc700;
+}
+</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, intial-scale=1.0">
+<title>Testimonial HTML</title>
+<!--Stylesheet--------------------------->
+<link rel="stylesheet" href="css/style.css"/>
+<!--Fav-icon------------------------------>
+<link rel="shortcut icon" href="images/fav-icon.png"/>
+<!--poppins-font-family------------------->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<!--using-Font-Awesome-------------------->
+<script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+</head>
+{% endblock meta %}
+{% block content %}
+<div id="btn-div" style="margin-top: 5vh">
+    <button data-bs-toggle="modal" data-bs-target="#modal" style="width:20%; padding:2%;" >
+        <h5 class="h5" style="color: black; text-align: center;">Give Review</h5>
+    </button>
+</div>
+  
+  <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog rounded-10">
+      <div class="modal-content bg-light">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 w-100 text-center">Review</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="form" method="POST" action="">
+            {% csrf_token %}
+          <table><tr><td>
+            <div id="btn-div">
+                <div class="form-outline form-white mb-4 rate">
+                        <input type="radio" id="star5" name="rating" value="5" />
+                        <label for="star5" title="text"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4" />
+                        <label for="star4" title="text"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3" />
+                        <label for="star3" title="text"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2" />
+                        <label for="star2" title="text"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1" />
+                        <label for="star1" title="text"><i class="fas fa-star"></i></label>
+                </div>
+            </div>
+        </td></tr>
+          
+            <tr><td><div class="form-outline form-white mb-4">
+              <textarea id="review_text" placeholder="Comment" name="review_text" cols="50" rows="5" required="" class="form-control form-control-lg" spellcheck="false" ></textarea>
+            </div></td></tr>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button data-bs-dismiss="modal" class="btn btn-outline-dark btn-lg px-5" type="submit" value="Create!" id="create">Submit</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<br>
+
+
+<section id="testimonials" style="margin-bottom: 50px">
+    <div class="testimonial-heading">
+        <span>Comments</span>
+        <h1>Clients Says</h1>
+    </div>
+    <div class="testimonial-box-container"></div>
+</section>
+<div id="btn-div">
+    <button id="show-more" style="text-decoration: underline;border:1px solid rgb(255, 255, 255, 0); background-color: transparent; margin-bottom: 8vh;">
+        Show More
+    </button>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    let revCnt = 0
+    const reviewBox = function(user, rating, date, review_text) {
+        const star1 = rating >= 1 ? "fas" : "far"
+        const star2 = rating >= 2 ? "fas" : "far"
+        const star3 = rating >= 3 ? "fas" : "far"
+        const star4 = rating >= 4 ? "fas" : "far"
+        const star5 = rating >= 5 ? "fas" : "far"
+        return `<div class="testimonial-box">
+  <div class="box-top">
+      <div class="profile">
+          <div class="profile-img">
+              <img src="https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png" />
+          </div>
+          <div class="name-user">
+              <strong>${user}</strong>
+              <span>${date}</span>
+          </div>
+      </div>
+      <div class="reviews">
+          <i class="${star1} fa-star"></i>
+          <i class="${star2} fa-star"></i>
+          <i class="${star3} fa-star"></i>
+          <i class="${star4} fa-star"></i>
+          <i class="${star5} fa-star"></i>
+      </div>
+  </div>
+  <div class="client-comment">
+      <p>${review_text}</p>
+  </div>
+</div>`
+    }
+
+    $(document).ready(function(){
+        $.get("{% url 'review:show_json' %}", function(data) {
+            var users = JSON.parse("{{ users|escapejs }}");
+        
+            console.log(data.length)
+            console.log(revCnt)
+            cnt4 = revCnt + 4
+            for (let i = revCnt; i < Math.min(data.length, cnt4); i++){
+                console.log(i)
+                const review = data[data.length - i - 1]
+                $(".testimonial-box-container").append(reviewBox(
+                    users[review.fields.user],
+                    review.fields.rating,
+                    review.fields.date,
+                    review.fields.review_text
+                ))
+                revCnt += 1
+            }
+        });
+      $("#show-more").click(function(){
+        $.get("{% url 'review:show_json' %}", function(data) {
+            var users = JSON.parse("{{ users|escapejs }}");
+
+            console.log(data.length)
+            console.log(revCnt)
+            cnt4 = revCnt + 4
+            for (let i = revCnt; i < Math.min(data.length, cnt4); i++){
+                console.log(i)
+                const review = data[data.length - i - 1]
+                $(".testimonial-box-container").append(reviewBox(
+                    users[review.fields.user],
+                    review.fields.rating,
+                    review.fields.date,
+                    review.fields.review_text
+                ))
+                revCnt += 1
+            }
+            if (revCnt == data.length){
+                $("#show-more").text("You've reached the end!")
+            }
+        });
+      })
+      $("#modal").on("hidden.bs.modal", function() {
+    $("#modal").find("#form").trigger("reset")
+   })
+      $("#create").on('click', function(e) {  
+        e.preventDefault()
+        $.post("{% url 'review:create_review' %}",
+            {
+            rating: $("input[type='radio'][name='rating']:checked").val(),
+            review_text: $('#review_text').val(),
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+            function(data, status){
+            $.ajax({
+                url: "{% url 'review:show_json' %}", 
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    const review = data[data.length - 1]
+                    $(".testimonial-box-container").prepend(reviewBox(
+                                "{{ user.username}}",
+                                review.fields.rating,
+                                review.fields.date,
+                                review.fields.review_text
+                            ))
+                }
+            }) 
+        });
+    })
+
+    });
+    
+</script>
+{% endblock content %}
