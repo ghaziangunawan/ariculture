@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<body> 
+    <div class="container">
+        <div class = "row" style="margin-top: 40px ;">
+            <h2 style="text-align:center"> Hello {{username}} ! Here are your advertisements </h2>
+        </div>
+        <div class="row" style="margin-top: 60px;">
+            {% for item in list_item %}
+            <div class="col-sm" >
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">{{item.title}}</h5>
+                    <p class="card-text">{{item.description}}</p>
+                    <button type="button" class="btn btn-warning"><a href="{% url 'homepage:set_remove' item.id %}"style="color:#ffffff; text-decoration: none;">Remove</a></button>
+                </div>
+            </div>
+            {% endfor %}
+            <button type="button" class="btn btn-primary"><a href="{% url 'homepage:create_advert' %}"style="color:#ffffff; text-decoration: none;">New Advertisement</a></button>
+        </div>
+    </div>
+</body>
+{% endblock content %}

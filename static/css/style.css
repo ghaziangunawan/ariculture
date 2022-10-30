@@ -1,0 +1,234 @@
+*{ 
+    margin-top: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.background_home {
+    margin-top: -2vh;
+    background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0));
+    background-repeat: no-repeat;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.content{
+    font-family: 'Trebuchet';
+    width: 100%;
+    position: absolute;
+    top: 47%;
+    transform: translateY(-50%);
+    text-align: center;
+    color:white ;
+}
+.content h1{
+    font-size: 160px;
+    font-weight: 600;
+    -webkit-text-stroke: 1px #fff;
+    color: transparent;
+    background-image: linear-gradient(#fff,#fff);
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-position: -1400px 0;
+    animation: backcolor 5s linear infinite alternate;
+}
+@keyframes backcolor{
+    100%{
+        background-position: 0 0;
+    }
+}
+.content a{
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    font-size: 24px;
+    border: 2px solid #fff;
+    padding: 14px 70px;
+    border-radius: 50px;
+    margin-top: 20px;
+}
+.videobg{
+    position:absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+.bg2{
+    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url("/static/img/background.jpg");
+    height: 100vh;
+    background-repeat: no-repeat;
+    position: relative;
+}
+.bg2c{
+    display: flex;
+    justify-content: center;
+    margin: 2em 0em;
+}
+.bg2 h2 {
+    transform: translateY(38%);
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    color: #48c6cf;
+    text-align: center;
+}
+.bg2 h2::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 120px;
+    height: 1px;
+    background: #ddd;
+    bottom: 1px;
+    left: calc(50% - 60px);
+  }
+.bg2 h2::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: #8e8d8a;
+    bottom: 0;
+    left: calc(50% - 20px);
+  }
+.div1{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    float:left;
+    flex-direction: column;
+    width: 50%;
+    font-size:1.5rem
+}
+.div1 p{
+    margin-top: 25%;
+    margin-left: 10%;
+    padding: 40px;
+}
+@media (min-aspect-ration: 16/9){
+    .videobg{
+        width: 100%;
+        height: auto;
+    }
+}
+@media (max-aspect-ration: 16/9){
+    .videobg{
+        width: auto;
+        height: 100%;
+    }
+}
+.farmer {
+    transform: translatey(-5%);
+    margin-top: 5%;
+    margin-left: 50%;
+    padding: 40px;
+    text-align: center;
+  }
+
+
+.ourteam {
+    background-color: #12172b;
+    font-family: 'Poppins';
+    
+  }
+  
+  .container {
+    margin: 0px 40px;
+    color: white;
+  }
+  
+  .heading {
+    font-size: 60px;
+    color: white;
+  }
+  
+  .heading span {
+    font-style: italic;
+    font-size: 30px;
+  }
+  
+  .profiles {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 40px;
+  }
+  
+  .profile {
+    flex-basis: 260px;
+  }
+  
+  .profile .profile-img {
+    height: 260px;
+    width: 260px;
+    border-radius: 50%;
+    filter: grayscale(100%);
+    cursor: pointer;
+    transition: 400ms;
+  }
+  
+  .profile:hover .profile-img {
+    filter: grayscale(0);
+  }
+  
+  .user-name {
+    margin-top: 30px;
+    font-size: 35px;
+  }
+  
+  .profile h5 {
+    font-size: 18px;
+    font-weight: 100;
+    letter-spacing: 3px;
+    color: #ccc;
+  }
+  
+  .profile p {
+    font-size: 16px;
+    margin-top: 20px;
+    text-align: justify;
+  }
+  
+  @media only screen and (max-width: 1150px) {
+    .profiles {
+      flex-direction: column;
+    }
+  
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .profile p {
+      text-align: center;
+      margin: 20px 60px 80px 60px;
+      font-size: 20px;
+    }
+  }
+  
+  @media only screen and (max-width: 900px) {
+    .heading {
+      font-size: 40px;
+      color: white;
+      text-align: center;
+    }
+  
+    .heading span {
+      font-size: 15px;
+    }
+  
+    .profiles {
+      margin: 20px 0;
+    }
+  
+    .profile p {
+      margin: 20px 10px 80px 10px;
+    }
+  }

@@ -6,17 +6,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   {% block meta %}
   {% endblock meta %}
 </head>
 
+
 <body>
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'example_app:index' %}">
-        <img src="https://pbp-fasilkom-ui.github.io/ganjil-2023/en/img/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+      <a class="navbar-brand" href="{% url 'homepage:index' %}">
+        <img src="https://pbp-fasilkom-ui.github.io/ganjil-2023/en/img/logo.png" alt="Logo" width="30" height="30" class="d-inline-bloFck align-text-top">
         Ariculture
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,13 +27,19 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'example_app:index' %}"><i class="fa fa-home"></i> Home</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'homepage:index' %}"><i class="fa fa-home"></i> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Menu 1</a>
+            <a class="nav-link active" aria-current="page" href="#">Info</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Menu 2</a>
+            <a class="nav-link active" aria-current="page" href="#">News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Reviews</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Advertisements</a>
           </li>
         </ul>
         {% if user.is_authenticated %}
@@ -43,8 +51,9 @@
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="#">Profile</a></li>
                   <li><a class="dropdown-item" href="#">Setting</a></li>
+                  <li><a class="dropdown-item" href="{% url 'homepage:advertise' %}">Advertising</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="{% url 'example_app:logout' %}"><i class="fa fa-arrow-circle-right"></i> Logout</a></li>
+                  <li><a class="dropdown-item" href="{% url 'homepage:logout' %}"><i class="fa fa-arrow-circle-right"></i> Logout</a></li>
               </ul>
           </li>
         </ul>
