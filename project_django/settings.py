@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'review',
     'news',
     'advertisement',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

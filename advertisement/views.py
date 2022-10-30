@@ -2,7 +2,11 @@ from django.shortcuts import render
 from homepage.models import Advertisement
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
-from django.http import HttpResponse,JsonResponse
+from django.http import HttpResponse
+from django.core import serializers
+from advertisement.serializers import AdvertisementSerializer
+from rest_framework import viewsets
+
 
 
 # Create your views here.
@@ -16,3 +20,7 @@ def show_advertisement(request):
 def show_json(request):
     data = Advertisement.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+class AdvertisementViewset(viewsets.ModelViewSet):
+    queryset = Advertisement.objects.all()
+    serializer_class = AdvertisementSerializer
