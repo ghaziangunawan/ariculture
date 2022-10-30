@@ -11,6 +11,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from homepage.models import Advertisement
 from django.core import serializers
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -21,8 +22,6 @@ def show_advertisement_user(request):
     advertisement_item = Advertisement.objects.filter(user=request.user)
     context = {"list_item": advertisement_item, "username": str(request.user).upper(),"user_id" : request.user.id}   
     return render(request, 'advertisement_user.html',context)
-
-
 
 @login_required(login_url="/account/login/")
 def set_remove(request, id):
@@ -35,14 +34,15 @@ def show_json(request):
     data = Advertisement.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
-    
 def create_ad(request):
     if request.method == "POST":
         title = request.POST.get("title")
         description = request.POST.get("description")
         ad_type = request.POST.get("ad_type")
+        var = User.objects.get(pk=request.user.id)
+
         Ad = Advertisement.objects.create(
-            user=request.user,
+            user=var,
             title=title,
             description=description,
             ad_type = ad_type

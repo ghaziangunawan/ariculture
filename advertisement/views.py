@@ -8,7 +8,7 @@ from django.http import HttpResponse,JsonResponse
 # Create your views here.
 @login_required(login_url='/account/login/')
 def show_advertisement(request):
-    advertisement_item = Advertisement.objects.all()
+    advertisement_item = Advertisement.objects.all().values()
     context = {"list_item": advertisement_item, "username": str(request.user).upper()}   
     return render(request, 'advertisements.html',context)
 

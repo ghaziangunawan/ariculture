@@ -29,16 +29,13 @@
             <a class="nav-link active" aria-current="page" href="{% url 'homepage:index' %}"><i class="fa fa-home"></i> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Info</a>
+            <a class="nav-link active" aria-current="page" href="/news/">News</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">News</a>
+            <a class="nav-link active" aria-current="page" href="/review/">Reviews</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Reviews</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Advertisements</a>
+            <a class="nav-link active" aria-current="page" href="/advertisement/">Community</a>
           </li>
         </ul>
         {% if user.is_authenticated %}
