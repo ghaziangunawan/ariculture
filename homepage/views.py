@@ -21,7 +21,7 @@ def index(request):
 def show_advertisement_user(request):
     advertisement_item = Advertisement.objects.filter(user=request.user)
     context = {"list_item": advertisement_item, "username": str(request.user).upper(),"user_id" : request.user.id}   
-    return render(request, 'advertisement_user.html',context)
+    return render(request, 'Advertisement_user.html', context)
 
 @login_required(login_url="/account/login/")
 def set_remove(request, id):
