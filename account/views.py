@@ -18,10 +18,10 @@ def account(request):
     return redirect('homepage:index')
 
 def register(request):
-    form = UserForm()
+    form = UserCreationForm()
 
     if request.method == "POST":
-        form = UserForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Account successfully created!')
