@@ -59,7 +59,7 @@ def profile(request):
     data = UserLand.objects.filter(user_farmer=request.user)
     context = {
         "land_item": data,
-        "first_name": str(request.user.first_name)
+        "username": request.user
     }
     return render(request, "profile.html", context)
 
