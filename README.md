@@ -23,5 +23,4 @@ To run it locally, we can use the command "python manage.py runserver" in the di
 3. Farmland info (for obtaining Fertilizer type, Fertilizer dose, and etc. (Jovian)
 4. News regarding agriculture (Moza)
 5. Advertisements about the farmer's farm land. (Ghazian)
-6. Reviews and rating regarding the farmers.
-7. Contact us page for filing complaints. (David)
+6. Reviews and rating regarding the farmers.(David)
