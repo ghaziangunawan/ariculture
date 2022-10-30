@@ -9,6 +9,6 @@ urlpatterns = [
     path('', index, name='index'),
     path('Advertising/', show_advertisement_user, name='advertise'),
     path('Create_Advert/', create_ad, name='create_ad'),
-    path("set_remove/<int:id>", set_remove, name="set_remove"),
+    path("Advertising/set_remove/<int:id>", set_remove, name="set_remove"),
     path("json/", show_json, name="show_json"),    
 ]
