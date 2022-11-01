@@ -35,17 +35,18 @@ def show_json(request):
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def create_ad(request):
+    username = str(request.user)
     if request.method == "POST":
         title = request.POST.get("title")
         description = request.POST.get("description")
         ad_type = request.POST.get("ad_type")
         var = User.objects.get(pk=request.user.id)
-
         Ad = Advertisement.objects.create(
             user=var,
             title=title,
             description=description,
-            ad_type = ad_type
+            ad_type = ad_type,
+            username = username
         )
         return JsonResponse(
             {
@@ -56,6 +57,7 @@ def create_ad(request):
                     "description": Ad.description,
                     "ad_type" : Ad.ad_type,
                     "date": Ad.date,
+                    "username" : Ad.username
                 },
             },
             status=200,

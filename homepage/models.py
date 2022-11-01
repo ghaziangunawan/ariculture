@@ -9,3 +9,5 @@ class Advertisement(models.Model):
     title = models.TextField()
     description = models.TextField()
     ad_type = models.TextField(default="FARMLAND")
+    username = models.TextField(default="NULL")
+
