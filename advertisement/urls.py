@@ -2,7 +2,7 @@ from django.urls import path, include
 from advertisement.views import  show_advertisement
 from advertisement.views import show_json
 
-
+ 
 
 
 urlpatterns = [
