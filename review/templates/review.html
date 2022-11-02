@@ -268,7 +268,7 @@ button{
 
 
 <div id="btn-div" style="margin-top: 5vh">
-    <button data-bs-toggle="modal" data-bs-target="#modal" style="width:20%; padding:2%;" >
+    <button data-bs-toggle="modal" data-bs-target="#modal" style="width:20%; padding:2%;" class="btn btn-light">
         <h5 class="h5" style="color: black; text-align: center;">Give Review</h5>
     </button>
 </div>
@@ -343,22 +343,22 @@ button{
   <div class="box-top">
       <div class="profile">
           <div class="profile-img">
-              <img src="https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png" />
-          </div>
-          <div class="name-user">
-              <strong>${user}</strong>
-              <span>${date}</span>
+              <img src="https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png" alt="Image" height="10" width="10" />
           </div>
       </div>
-      <div class="reviews">
+  </div>
+  <div class="client-comment" style="word-break: break-all;">
+    <div class="reviews">
           <i class="${star1} fa-star"></i>
           <i class="${star2} fa-star"></i>
           <i class="${star3} fa-star"></i>
           <i class="${star4} fa-star"></i>
           <i class="${star5} fa-star"></i>
       </div>
-  </div>
-  <div class="client-comment">
+      <div class="name-user">
+              <strong>${user}</strong>
+              <span>${date}</span>
+          </div>
       <p>${review_text}</p>
   </div>
 </div>`
