@@ -12,7 +12,7 @@ from django.core import serializers
 @login_required(login_url='/account/login/')
 def show_advertisement(request):
     advertisement_item = Advertisement.objects.all().values()
-    context = {"list_item": advertisement_item, "username": str(request.user).upper()}   
+    context = {"list_item": advertisement_item, "username": str(request.user)}   
     return render(request, 'advertisements.html',context)
 
 @login_required(login_url="/account/login/")

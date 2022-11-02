@@ -20,7 +20,7 @@ def index(request):
 @login_required(login_url='/account/login/')
 def show_advertisement_user(request):
     advertisement_item = Advertisement.objects.filter(user=request.user)
-    context = {"list_item": advertisement_item, "username": str(request.user).upper(),"user_id" : request.user.id}   
+    context = {"list_item": advertisement_item, "username": str(request.user),"user_id" : request.user.id}   
     return render(request, 'Advertisement_user.html', context)
 
 @login_required(login_url="/account/login/")
