@@ -11,3 +11,8 @@ class Advertisement(models.Model):
     ad_type = models.TextField(default="FARMLAND")
     username = models.TextField(default="NULL")
 
+class Comments(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    comment = models.TextField()
+    

@@ -9,9 +9,11 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from homepage.models import Advertisement
+from . import models
 from django.core import serializers
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect,HttpResponseNotFound
+from . import forms
 
 
 def index(request):
@@ -19,19 +21,19 @@ def index(request):
 
 @login_required(login_url='/account/login/')
 def show_advertisement_user(request):
-    advertisement_item = Advertisement.objects.filter(user=request.user)
-    context = {"list_item": advertisement_item, "username": str(request.user),"user_id" : request.user.id}   
+    advertisement_item = models.Advertisement.objects.filter(user=request.user)
+    context = {"list_item": advertisement_item, "username": str(request.user).upper(),"user_id" : request.user.id}   
     return render(request, 'Advertisement_user.html', context)
 
 @login_required(login_url="/account/login/")
 def set_remove(request, id):
-    item = Advertisement.objects.get(user=request.user, id=id)
+    item = models.Advertisement.objects.get(user=request.user, id=id)
     item.delete()
     return HttpResponseRedirect(reverse("homepage:advertise"))
 
 @login_required(login_url="/account/login/")
 def show_json(request):
-    data = Advertisement.objects.filter(user=request.user)
+    data = models.Advertisement.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def create_ad(request):
@@ -41,7 +43,7 @@ def create_ad(request):
         description = request.POST.get("description")
         ad_type = request.POST.get("ad_type")
         var = User.objects.get(pk=request.user.id)
-        Ad = Advertisement.objects.create(
+        Ad = models.Advertisement.objects.create(
             user=var,
             title=title,
             description=description,
@@ -62,4 +64,32 @@ def create_ad(request):
             },
             status=200,
         )
+
+def show_comment(request):
+    comment = models.Comments.objects.all()
+    form = forms.CommentForm(request.POST)
+    context = {
+        'data_comment': comment,
+        'form': form,
+    }
+    return render(request,"index.html", context)
+
+
+def get_comment(request):
+    comment = models.Comments.objects.all()
+    data = serializers.serialize("json", comment)
+    return HttpResponse(data, content_type="application/json")
+
+
+def add_comment(request):
+    form = forms.CommentForm(request.POST)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.save()
+            return show_comment(request)
+        return HttpResponseNotFound()        
+    return HttpResponseNotFound()
 

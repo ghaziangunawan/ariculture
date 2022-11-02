@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Homepage</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock meta %}
+
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    function card(item) {
+        return `
+        <div class="col">
+        <div class="card border-primary mb-3" style="max-width: 18rem;">
+        <div class="card-header">Comment</div>
+        <div class="card-body text-primary">
+          <h5 class="card-title">${item.fields.name}</h5>
+          <p class="card-text">${item.fields.comment}</p>
+        </div>
+        </div>  
+        </div>
+      `
+  };
+  function loop() {
+    $.get("{% url 'homepage:get_comment' %}", function(data) {
+        $.each(data, function(i, value) {
+            $("#comment").append(card(value));
+        });
+    });
+};
+$("#submiit").click(e=>{
+  addcomment();
+  e.preventDefault()
+})
+loop();
+})
+async function addcomment() {
+    console.log();
+    const form = $('.create_comment');
+    $.ajax({
+        type: "POST",
+        url: "/add/",
+        data: form.serialize(),
+        error: console.log("error"), 
+    }).done(function (data) {
+        console.log();
+        form.trigger("reset");
+        $("#comment").prepend(card(data));
+    })
+    $("#staticBackdrop").modal("hide");
+  }
+
+
+</script>
+<div class="background_home">
+    <video autoplay loop muted plays-inline class="videobg">
+        <source src="/static/img/videobg.mp4" type="video/mp4">
+    </video>
+    <div class="content">
+        <h1>Ariculture</h1>
+        <a href="#about">Learn More</a>
+    </div>
+</div>
+<div class="bg2" id="about">
+    <h2 class = "color-blue about"> About us </h2>
+    <div class=  "bg2c">
+        <div style="width: 80% ; background-color: beige; transform: translateY(10%);">
+            <div class = "div1" style="color: black;">
+                <p>Ariculture is a website that is designed to help farmers around Indonesia to be able to promote and cultivate their lands. Then, Agriculture also hopes that with this
+                    app farmers all around Indonesia be able to obtain the right information regarding the best possible way to create a farm.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="farmer">
+      <img class="img2" src="/static/img/farmergiff.gif" alt="farmer" class="farmer">
+  </div>
+</div>
+<div class="ourteam">
+<div class="container">
+    <h1 class="heading"><span>meet </span>Our Team</h1>
+
+    <div class="profiles">
+      <div class="profile">
+        <img src="/static/img/NA.jpg" class="profile-img">
+
+        <h3 class="user-name">Nicolas</h3>
+        <h5>Homepage</h5>
+        <h5>Module</h5>
+        <p>International Class: 2106720973</p>
+      </div>
+      <div class="profile">
+        <img src="/static/img/david.jpg" class="profile-img">
+
+        <h3 class="user-name">David</h3>
+        <h5>Review</h5>
+        <h5>Module</h5>
+        <p>International Class: 2106720866</p>
+      </div>
+      <div class="profile">
+        <img src="/static/img/moza.jpg" class="profile-img">
+
+        <h3 class="user-name">Moza</h3>
+        <h5>News</h5>
+        <h5>Module</h5>
+        <p>International Class: 2106657292</p>
+      </div>
+    </div>
+  </div>
+
+      <div class="container">
+        <div class="profiles">
+          <div class="profile">
+            <img src="/static/img/jovian.jpg" class="profile-img">
+    
+            <h3 class="user-name">Jovian</h3>
+            <h5>Farm Land</h5>
+            <h5>Module</h5>
+            <p>International Class: 2106720891</p>
+          </div>
+          <div class="profile">
+            <img src="/static/img/ai.jpg" class="profile-img">
+    
+            <h3 class="user-name">Raizaz</h3>            
+            <h5>Account</h5>
+            <h5>Module</h5>
+            <p>International Class: 2106657815</p>
+          </div>
+          <div class="profile">
+            <img src="/static/img/gazian.jpg" class="profile-img">
+    
+            <h3 class="user-name">Ghazian</h3>
+            <h5>Advertisement</h5>
+            <h5>Module</h5>
+            <p>International Class: 2106656522</p>
+          </div>
+        </div>
+      </div>
+    </div>
+<div>
+  <button class="button-9" role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Press here if you have any comments!</button>
+  <!-- <button type="button" class="raise addTaskButton" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="color:#ffffff ;">Add a review</button> -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Topics</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="create_comment" method="POST">
+                {% csrf_token %}
+                <div class="form-floating responsive" style="padding-left:0.5%;margin-top: 2%;">
+                  <h5>Name:</h5>
+                  {{form.name}}
+                </div>
+                <div class="form-floating responsive" style="padding-left:0.5%;margin-top: 2%;">
+                  <h5>Reccomended topics: </h5>
+                  {{form.comment}}
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="submiit">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+  <div>
+    <table class="row row-cols-md-4 g-5 mt-2 mb-2" id="comment" style="margin-left: 4.7%;text-align: center;">
+      
+    </table>
+  </div>
+ 
+
+            
+
+
+{% endblock content %}
