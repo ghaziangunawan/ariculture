@@ -14,6 +14,9 @@ from django.core import serializers
 from news.forms import FeedbackForm
 
 
+def show_json(request):
+    data = Feedback.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 # Create your views here.
 @login_required(login_url='/account/login/')
