@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
@@ -24,7 +24,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Install Railway
-        run: curl -fsSL https://railway.app/install.sh | sh
+        run: yarn global add @railway/cli
 
       - name: Deploy
         run: railway up
