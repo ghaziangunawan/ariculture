@@ -60,6 +60,10 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://web-production-19b0.up.railway.app'
+]
+
 ROOT_URLCONF = 'project_django.urls'
 
 TEMPLATES = [
@@ -145,4 +149,4 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ['https://web-production-19b0.up.railway.app/account/register']
+
