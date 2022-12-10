@@ -239,6 +239,7 @@ button{
 }
 
 </style>
+<!-- untuk impor style, font ke djongo, utk styling(supaya bisa pake css) -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, intial-scale=1.0">
 <title>Testimonial HTML</title>
@@ -269,13 +270,13 @@ button{
     </div>
 </div>
 
-
+<!-- untuk button -->
 <div id="btn-div" style="margin-top: 5vh">
     <button data-bs-toggle="modal" data-bs-target="#modal" style="width:20%; padding:2%;" class="btn btn-light" >
         <h5 class="h5" style="color: black; text-align: center;">Give Review</h5>
     </button>
 </div>
-  
+  <!-- untuk form give review -->
   <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog rounded-10">
       <div class="modal-content bg-light">
@@ -287,7 +288,7 @@ button{
           <form id="form" method="POST" action="">
             {% csrf_token %}
           <table><tr><td>
-            <div id="btn-div">
+            <!-- <div id="btn-div"> untuk kasih bintang -->
                 <div class="form-outline form-white mb-4 rate">
                         <input type="radio" id="star5" name="rating" value="5" />
                         <label for="star5" title="text"><i class="fas fa-star"></i></label>
@@ -303,11 +304,13 @@ button{
             </div>
         </td></tr>
           
+        <!-- untuk give comment review -->
             <tr><td><div class="form-outline form-white mb-4">
               <textarea id="review_text" placeholder="Comment" name="review_text" cols="50" rows="5" required="" class="form-control form-control-lg" spellcheck="false" ></textarea>
             </div></td></tr>
           </table>
         </div>
+        <!-- untuk button dibawah modal -->
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
           <button data-bs-dismiss="modal" class="btn btn-outline-dark btn-lg px-5" type="submit" value="Create!" id="create">Submit</button>
@@ -320,6 +323,7 @@ button{
 <br>
 
 
+<!-- bagian bawah untuk lait comment yang udah diberikan -->
 <section id="testimonials" style="margin-bottom: 50px">
     <div class="testimonial-heading">
         <span>Comments</span>
@@ -333,15 +337,20 @@ button{
     </button>
 </div>
 
+<!-- untuk import functon dari google (ajax) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
+    // inisialisasi count
     let revCnt = 0
     const reviewBox = function(user, rating, date, review_text) {
-        const star1 = rating >= 1 ? "fas" : "far"
+        // fas = bintang yg ke isi, far bintang yang tdk ke isi
+        const star1 = rating >= 1 ? "fas" : "far"  
         const star2 = rating >= 2 ? "fas" : "far"
         const star3 = rating >= 3 ? "fas" : "far"
         const star4 = rating >= 4 ? "fas" : "far"
         const star5 = rating >= 5 ? "fas" : "far"
+        // untuk generate card
+        // untuk tunjukin nama, bintang di card hasil comment nya
         return `<div class="testimonial-box">
   <div class="box-top">
       <div class="profile">
@@ -368,16 +377,16 @@ button{
     }
 
     $(document).ready(function(){
-        $.get("{% url 'review:show_json' %}", function(data) {
+        $.get("{% url 'review:show_json' %}", function(data) { // dapetin data dr json, trus di parse
             var users = JSON.parse("{{ users|escapejs }}");
         
             console.log(data.length)
             console.log(revCnt)
             cnt4 = revCnt + 4
-            for (let i = revCnt; i < Math.min(data.length, cnt4); i++){
+            for (let i = revCnt; i < Math.min(data.length, cnt4); i++){ // ngeload datanya
                 console.log(i)
                 const review = data[data.length - i - 1]
-                $(".testimonial-box-container").append(reviewBox(
+                $(".testimonial-box-container").append(reviewBox( // untuk add ke dalem box supaya bisa di show
                     users[review.fields.user],
                     review.fields.rating,
                     review.fields.date,
@@ -386,14 +395,14 @@ button{
                 revCnt += 1
             }
         });
-      $("#show-more").click(function(){
+      $("#show-more").click(function(){ 
         $.get("{% url 'review:show_json' %}", function(data) {
             var users = JSON.parse("{{ users|escapejs }}");
 
             console.log(data.length)
             console.log(revCnt)
             cnt4 = revCnt + 4
-            for (let i = revCnt; i < Math.min(data.length, cnt4); i++){
+            for (let i = revCnt; i < Math.min(data.length, cnt4); i++){ // looping dari jumlah yang udah ditampilin sampe +4
                 console.log(i)
                 const review = data[data.length - i - 1]
                 $(".testimonial-box-container").append(reviewBox(
@@ -409,10 +418,10 @@ button{
             }
         });
       })
-      $("#modal").on("hidden.bs.modal", function() {
+      $("#modal").on("hidden.bs.modal", function() { // habis is modalnya di reset ke kosong
     $("#modal").find("#form").trigger("reset")
    })
-      $("#create").on('click', function(e) {  
+      $("#create").on('click', function(e) {  // habis submit formnya bakalan nambahin/ nampilin 1 card yg baru di isi
         e.preventDefault()
         $.post("{% url 'review:create_review' %}",
             {
@@ -421,7 +430,7 @@ button{
             csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
             },
             function(data, status){
-            $.ajax({
+            $.ajax({ // nambahin 1 review ke dalam review boxnya
                 url: "{% url 'review:show_json' %}", 
                 method: 'GET',
                 dataType: 'json',
