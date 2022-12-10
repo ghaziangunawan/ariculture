@@ -31,7 +31,7 @@ def set_remove(request, id):
     item.delete()
     return HttpResponseRedirect(reverse("homepage:advertise"))
 
-@login_required(login_url="/account/login/")
+
 def show_json(request):
     data = models.Advertisement.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
