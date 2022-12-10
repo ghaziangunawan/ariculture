@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load static %}
+{% block content %}
 <style>
 *, *:before, *:after { 
   box-sizing: border-box;
 }
 
 body {
-  background: #eee;
+  background: #bfcebf;
   color: #191919;
   font-family: 'Lato', sans-serif;
 }
@@ -337,6 +337,50 @@ img:hover{
 .button-25:disabled:hover {
   box-shadow: none;
 }
+
+
+.background {
+  margin-top: -2vh;
+  background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0));
+  background-repeat: no-repeat;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.videobackground{
+  position:absolute;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.header-row{
+    flex-basis:50%;
+     
+}
+
+#header-title{
+    font-size:100px;
+}
+
+button{
+    width:180px;
+    color:#000;
+    font-size: 12px;
+    padding:12px 0;
+    background:#fff;
+    border:0;
+    border-radius:20px;
+    outline: none;
+    margin-top:30px;
+}
+
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
@@ -402,13 +446,28 @@ img:hover{
 
 
 </script>
-<div class="wrapper">
+
+<div class="background">
+  <video autoplay loop muted plays-inline class="videobackground">
+      <source src="/static/img/greenvideobg.mp4" type="video/mp4">
+  </video>
+  <div class="row header-row">
+      <div class="col">
+          <h1 id="header-title">News</h1>
+          <p> Here are the place for people who wanted to read about news regarding agriculture around Indonesia.</p>
+          <a href="#news"><button type="button" >Explore</button></a>
+      </div>
+  </div>
+</div>
+
+
+<div class="wrapper" id="news">
     <header class="header"><h1>News About Agriculture</h1></header>
     <figure class="featured-image-1">
       <a href="https://blkbanyuwangi.kemnaker.go.id/indonesian-agriculture-will-make-indonesia-become-a-great-nation/">
         <img src="https://images.pexels.com/photos/12382564/pexels-photo-12382564.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"></a>
      </figure>
-    <div class="number-1">1</div>
+    <div class="number-1" >1</div>
     <article class="article article-1">
       <h2>Indonesian Agriculture Will Make a real Nation</h2>
       <p>Rice terraces near Jatiluwih, Bali, Indonesia.
@@ -449,7 +508,7 @@ Agriculture sector has an important role in  national economic development struc
     </figure>
     <div class="number-4">4</div>
     <article class="article article-4">
-      <h2>Summary of Indonesia's Agriculture 4</h2>
+      <h2>Summary of Indonesia's Agriculture</h2>
       <p>Despite increasing food crop production, food security is challenged in the medium term by declining irrigation and logistics chain infrastructure.</p>
       <a href= "https://www.adb.org/publications/summary-indonesias-agriculture-natural-resources-and-environment-sector-assessment" ><b>[read more]</b></a>
     </article>
