@@ -14,6 +14,7 @@ from django.core import serializers
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect,HttpResponseNotFound
 from . import forms
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
@@ -93,3 +94,21 @@ def add_comment(request):
         return HttpResponseNotFound()        
     return HttpResponseNotFound()
 
+@csrf_exempt
+def save_ad_f(request):
+    if request.method == 'POST':
+        var = User.objects.get(pk=request.user.id)
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        ad_type = request.POST.get("ad_type")
+        username = str(request.user)
+        
+        models.Advertisement.objects.create(
+            user=var,
+            title=title,
+            description=description,
+            ad_type = ad_type,
+            username = username
+        )
+        return HttpResponse(b"CREATED", status=201)
+    return HttpResponseNotFound()

@@ -12,5 +12,7 @@ urlpatterns = [
     path('Advertising/', views.show_advertisement_user, name='advertise'),
     path('Create_Advert/', views.create_ad, name='create_ad'),
     path("Advertising/set_remove/<int:id>", views.set_remove, name="set_remove"),
-    path("json/", views.show_json, name="show_json"),     
+    path("json/", views.show_json, name="show_json"),    
+    path("save_ad_f/", views.save_ad_f, name="save_ad_f"),    
+    
 ]
