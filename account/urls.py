@@ -9,6 +9,7 @@ urlpatterns = [
     path('login/', login_user, name='login'),
     path('logout/', logout_user, name='logout'),
     path('profile/', profile, name='profile'),
+    path('profile/json', show_profile_json, name='show_profile_json'),
     path("remove_land/<int:id>", remove_land, name="remove_land"),
     path('json/', show_json, name='show_json'),
     path('login_f/', login_f, name='login_f'),

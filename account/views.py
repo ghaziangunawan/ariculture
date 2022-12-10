@@ -66,6 +66,10 @@ def profile(request):
     }
     return render(request, "profile.html", context)
 
+def show_profile_json(request):
+    data = UserLand.objects.filter(user_farmer=request.user)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
 @login_required(login_url="/account/login/")
 def remove_land(request, id):
     item = UserLand.objects.get(user_farmer=request.user, id=id)
