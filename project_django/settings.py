@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'review',
     'news',
     'advertisement',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -56,11 +57,19 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://web-production-19b0.up.railway.app'
+    'https://web-production-19b0.up.railway.app',
 ]
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'project_django.urls'
 

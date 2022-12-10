@@ -13,6 +13,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from farmland.models import UserLand
 from account.forms import *
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 
 def account(request):
     return redirect('homepage:index')
@@ -21,6 +23,7 @@ def register(request):
     form = UserCreationForm()
 
     if request.method == "POST":
+        print(request.POST)
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
@@ -68,3 +71,50 @@ def remove_land(request, id):
     item = UserLand.objects.get(user_farmer=request.user, id=id)
     item.delete()
     return HttpResponseRedirect(reverse("account:profile"))
+
+def show_json(request):
+    data = User.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+@csrf_exempt
+def login_f(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            # Redirect to a success page.
+            return JsonResponse({
+              "status": True,
+              "message": "Successfully Logged In!"
+              # Insert any extra data if you want to pass data to Flutter
+            }, status=200)
+        else:
+            return JsonResponse({
+              "status": False,
+              "message": "Failed to Login, Account Disabled."
+            }, status=401)
+    else:
+        return JsonResponse({
+          "status": False,
+          "message": "Failed to Login, check your email/password."
+        }, status=401)
+
+@csrf_exempt
+def register_f(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({
+              "status": True,
+              "message": "Successfully Registered!"
+                # Insert any extra data if you want to pass data to Flutter
+            }, status=200)
+        else:
+            return JsonResponse({
+              "status": False,
+              "message": "Failed to Register."
+            }, status=401)
+
