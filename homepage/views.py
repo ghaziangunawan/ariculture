@@ -31,7 +31,7 @@ def set_remove(request, id):
     item.delete()
     return HttpResponseRedirect(reverse("homepage:advertise"))
 
-
+@csrf_exempt
 def show_json(request):
     data = models.Advertisement.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")

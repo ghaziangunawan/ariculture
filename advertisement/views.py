@@ -15,7 +15,7 @@ def show_advertisement(request):
     context = {"list_item": advertisement_item, "username": str(request.user)}   
     return render(request, 'advertisements.html',context)
 
-@login_required(login_url="/account/login/")
+@csrf_exempt
 def show_json(request):
     data = Advertisement.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
