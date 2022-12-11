@@ -53,7 +53,7 @@ def save_review(request):
         review_text = request.POST.get('review_text')
         Review.objects.create(
             user = request.user,
-            rating = rating,
+            rating = int(float(rating)),
             date = datetime.datetime.now(),
             review_text = review_text
         )
@@ -65,3 +65,5 @@ def profile_user(request, user):
     req = User.objects.filter(username = user)
     data = Review.objects.filter(user=req[0])
     return HttpResponse(serializers.serialize("json",data), content_type='application/json')
+
+
