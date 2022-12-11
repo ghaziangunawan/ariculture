@@ -72,5 +72,4 @@ def save_review(request):
             review=review,
             date = date
         )
-        return HttpResponse("CREATED", status=200)
-    return HttpResponseNotFound()
+            
