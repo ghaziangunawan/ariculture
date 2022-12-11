@@ -15,6 +15,7 @@ from news.forms import FeedbackForm
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from news import models
+from django.http import JsonResponse
 
 
 def show_json(request):
@@ -72,4 +73,12 @@ def save_review(request):
             review=review,
             date = date
         )
-            
+        return JsonResponse({
+              "status": True,
+              "message": "Successfully Registered!"
+                }, status=200)
+    else:
+         return JsonResponse({
+              "status": False,
+              "message": "Failed to Register."
+            }, status=401)
