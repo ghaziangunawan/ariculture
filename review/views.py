@@ -15,6 +15,7 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from django.contrib.auth.models import User
 
 # Create your views here.
 # utk nunjukin html nya
@@ -59,3 +60,8 @@ def save_review(request):
         return HttpResponse(b"CREATED", status=201)
     
     return HttpResponseNotFound()
+
+def profile_user(request, user):
+    req = User.objects.filter(username = user)
+    data = Review.objects.filter(user=req[0])
+    return HttpResponse(serializers.serialize("json",data), content_type='application/json')
