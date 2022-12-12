@@ -118,6 +118,7 @@ def save_ad_f(request):
               "status": False,
               "message": "Failed to Register."
             }, status=401)
+   
 
 @csrf_exempt
 def save_comment_f(request):
