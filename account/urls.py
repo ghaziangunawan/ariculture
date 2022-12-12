@@ -13,4 +13,7 @@ urlpatterns = [
     path('json/', show_json, name='show_json'),
     path('login_f/', login_f, name='login_f'),
     path('register_f/', register_f, name='register_f'),
+    path('profile_f/<str:user>/', profile_json, name='profile_json'),
+    path('logout_user_f/', logout_user_f, name='logout_user_f'),
+    
 ]

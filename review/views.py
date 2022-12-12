@@ -13,6 +13,7 @@ import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 
 # Create your views here.
 def show_review(request):
@@ -38,4 +39,12 @@ def create_review(request):
 
 def show_json(request):
     data = Review.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def review_user_json(request, user):
+    print(request.user)
+    print(user)
+    req = User.objects.filter(username = user)
+    print(req)
+    data = Review.objects.filter(user=req[0])
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")

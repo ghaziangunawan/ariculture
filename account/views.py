@@ -59,6 +59,7 @@ def logout_user(request):
 
 @login_required(login_url='/account/login/')
 def profile(request):
+    print(request.user)
     data = UserLand.objects.filter(user_farmer=request.user)
     context = {
         "land_item": data,
@@ -73,7 +74,7 @@ def remove_land(request, id):
     return HttpResponseRedirect(reverse("account:profile"))
 
 def show_json(request):
-    data = User.objects.all()
+    data = User.objects.filter(is_active = True)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 @csrf_exempt
@@ -118,3 +119,28 @@ def register_f(request):
               "message": "Failed to Register."
             }, status=401)
 
+def profile_json(request, user):
+    print(type(request.user))
+    print(user)
+    req = User.objects.filter(username = user)
+    print(req)
+    data = UserLand.objects.filter(user_farmer=req[0])
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+@csrf_exempt
+def logout_user_f(request):
+    logout(request)
+    return JsonResponse({
+              "status": True,
+              "message": "Successfully Logout!"
+                # Insert any extra data if you want to pass data to Flutter
+            }, status=200)
+
+@csrf_exempt
+def deactivate_user(request, id):
+    User.objects.filter(id=id).update(is_activate = False)
+    return JsonResponse({
+              "status": True,
+              "message": "Successfully Registered!"
+                # Insert any extra data if you want to pass data to Flutter
+            }, status=200)
