@@ -62,7 +62,10 @@ def delete_task(request,id):
 def delete_flutter(request,id):
     task = Feedback.objects.filter(id =id)
     task.delete()
-    return show_news(request)
+    return JsonResponse({
+              "status": True,
+              "message": "Successfully Registered!"
+                }, status=200)
 
 @csrf_exempt
 def save_review(request):
