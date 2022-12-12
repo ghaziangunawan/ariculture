@@ -49,7 +49,7 @@ def show_json(request):
 @csrf_exempt
 def save_review(request):
     if request.method == 'POST':
-        rating = request.POST.get('rating')
+        rating = request.POST.get('rating') 
         review_text = request.POST.get('review_text')
         Review.objects.create(
             user = request.user,
