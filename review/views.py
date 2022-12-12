@@ -49,7 +49,7 @@ def show_json(request):
 @csrf_exempt
 def save_review(request):
     if request.method == 'POST':
-        rating = request.POST.get('rating')
+        rating = request.POST.get('rating') 
         review_text = request.POST.get('review_text')
         Review.objects.create(
             user = request.user,
@@ -57,9 +57,17 @@ def save_review(request):
             date = datetime.datetime.now(),
             review_text = review_text
         )
-        return HttpResponse(b"CREATED", status=201)
+        return JsonResponse({
+              "status": True,
+              "message": "Successfully Registered!"
+                # Insert any extra data if you want to pass data to Flutter
+            }, status=200)
     
-    return HttpResponseNotFound()
+    return JsonResponse({
+              "status": False,
+              "message": "Failed to Register."
+            }, status=401)
+
 
 def profile_user(request, user):
     req = User.objects.filter(username = user)

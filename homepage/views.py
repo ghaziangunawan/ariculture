@@ -32,6 +32,14 @@ def set_remove(request, id):
     item.delete()
     return HttpResponseRedirect(reverse("homepage:advertise"))
 
+@csrf_exempt
+def set_remove_flutter(request, id):
+    item = models.Advertisement.objects.get(user=User.objects.get(pk=request.user.id), id=id)
+    item.delete()
+    return JsonResponse({
+              "status": True,
+              "message": "Successfully Registered!"
+                }, status=200)
 
 def show_json(request):
     data = models.Advertisement.objects.filter(user=request.user)
@@ -110,5 +118,49 @@ def save_ad_f(request):
             ad_type = ad_type,
             username = username
         )
-        return HttpResponse(b"CREATED", status=201)
-    return HttpResponseNotFound()
+        
+        print('test')
+        return JsonResponse({
+              "status": True,
+              "message": "Successfully Registered!"
+                }, status=200)
+    return JsonResponse({
+              "status": False,
+              "message": "Failed to Register."
+            }, status=401)
+   
+
+@csrf_exempt
+def save_comment_f(request):
+    if request.method == 'POST':
+        var = User.objects.get(pk=request.user.id)
+        name = request.POST.get("name")
+        comment = request.POST.get("comment")
+        
+        
+        models.Comments.objects.create(
+            user=var,
+            name=name,
+            comment=comment,
+        )
+        return JsonResponse({
+              "status": True,
+              "message": "Successfully Commented!"
+                }, status=200)
+    else:
+         return JsonResponse({
+              "status": False,
+              "message": "Failed to Comment."
+            }, status=401)
+
+
+
+
+
+
+
+
+
+
+
+

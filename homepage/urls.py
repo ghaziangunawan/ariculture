@@ -14,5 +14,6 @@ urlpatterns = [
     path("Advertising/set_remove/<int:id>", views.set_remove, name="set_remove"),
     path("json/", views.show_json, name="show_json"),    
     path("save_ad_f/", views.save_ad_f, name="save_ad_f"),    
-    
+    path("set_remove_flutter/<int:id>", views.set_remove_flutter, name="set_remove_flutter"),  
+    path("save_comment_f/", views.save_comment_f, name="save_comment_f")
 ]
