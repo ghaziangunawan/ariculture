@@ -32,6 +32,14 @@ def set_remove(request, id):
     item.delete()
     return HttpResponseRedirect(reverse("homepage:advertise"))
 
+@csrf_exempt
+def set_remove_flutter(request, id):
+    item = models.Advertisement.objects.get(user=request.user, id=id)
+    item.delete()
+    return JsonResponse({
+              "status": True,
+              "message": "Successfully Registered!"
+                }, status=200)
 
 def show_json(request):
     data = models.Advertisement.objects.filter(user=request.user)
