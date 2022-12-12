@@ -122,3 +122,13 @@ def register_f(request):
               "message": "Failed to Register."
             }, status=401)
 
+@csrf_exempt
+def remove_land_f(request, id):
+    item = UserLand.objects.get(user_farmer=request.user, id=id)
+    item.delete()
+    return JsonResponse({
+        "status": True,
+        "message": "Successfully Deleted!"
+    }, status=200)
+
+    

@@ -14,4 +14,5 @@ urlpatterns = [
     path('json/', show_json, name='show_json'),
     path('login_f/', login_f, name='login_f'),
     path('register_f/', register_f, name='register_f'),
+    path('remove_land_f/<int:id>', remove_land_f, name='remove_land_f'),
 ]
