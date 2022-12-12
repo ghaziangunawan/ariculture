@@ -139,3 +139,12 @@ def logout_user_f(request):
               "message": "Successfully Logout!"
                 # Insert any extra data if you want to pass data to Flutter
         }, status=200)
+
+@csrf_exempt
+def remove_land_f(request, id):
+    item = UserLand.objects.get(user_farmer=request.user, id=id)
+    item.delete()
+    return JsonResponse({
+        "status": True,
+        "message": "Successfully Deleted!"
+    }, status=200)
