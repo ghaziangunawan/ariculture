@@ -128,10 +128,22 @@ def save_comment_f(request):
         )
         return JsonResponse({
               "status": True,
-              "message": "Successfully Registered!"
+              "message": "Successfully Commented!"
                 }, status=200)
     else:
          return JsonResponse({
               "status": False,
-              "message": "Failed to Register."
+              "message": "Failed to Comment."
             }, status=401)
+
+
+
+
+
+
+
+
+
+
+
+
