@@ -34,7 +34,7 @@ def set_remove(request, id):
 
 @csrf_exempt
 def set_remove_flutter(request, id):
-    item = models.Advertisement.objects.get(user=request.user, id=id)
+    item = models.Advertisement.objects.get(user=User.objects.get(pk=request.user.id), id=id)
     item.delete()
     return JsonResponse({
               "status": True,
