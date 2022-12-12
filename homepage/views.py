@@ -112,3 +112,26 @@ def save_ad_f(request):
         )
         return HttpResponse(b"CREATED", status=201)
     return HttpResponseNotFound()
+
+@csrf_exempt
+def save_comment_f(request):
+    if request.method == 'POST':
+        var = User.objects.get(pk=request.user.id)
+        name = request.POST.get("name")
+        comment = request.POST.get("comment")
+        
+        
+        models.Comments.objects.create(
+            user=var,
+            name=name,
+            comment=comment,
+        )
+        return JsonResponse({
+              "status": True,
+              "message": "Successfully Registered!"
+                }, status=200)
+    else:
+         return JsonResponse({
+              "status": False,
+              "message": "Failed to Register."
+            }, status=401)
