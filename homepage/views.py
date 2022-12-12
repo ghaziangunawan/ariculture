@@ -110,8 +110,14 @@ def save_ad_f(request):
             ad_type = ad_type,
             username = username
         )
-        return HttpResponse(b"CREATED", status=201)
-    return HttpResponseNotFound()
+         return JsonResponse({
+              "status": True,
+              "message": "Successfully Registered!"
+                }, status=200)
+     return JsonResponse({
+              "status": False,
+              "message": "Failed to Register."
+            }, status=401)
 
 @csrf_exempt
 def save_comment_f(request):
