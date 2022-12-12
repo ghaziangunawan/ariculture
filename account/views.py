@@ -123,7 +123,6 @@ def register_f(request):
               "message": "Failed to Register."
             }, status=401)
 
-<<<<<<< HEAD
 def profile_json(request, user):
     print(type(request.user))
     print(user)
@@ -139,25 +138,4 @@ def logout_user_f(request):
               "status": True,
               "message": "Successfully Logout!"
                 # Insert any extra data if you want to pass data to Flutter
-            }, status=200)
-
-@csrf_exempt
-def deactivate_user(request, id):
-    User.objects.filter(id=id).update(is_activate = False)
-    return JsonResponse({
-              "status": True,
-              "message": "Successfully Registered!"
-                # Insert any extra data if you want to pass data to Flutter
-            }, status=200)
-=======
-@csrf_exempt
-def remove_land_f(request, id):
-    item = UserLand.objects.get(user_farmer=request.user, id=id)
-    item.delete()
-    return JsonResponse({
-        "status": True,
-        "message": "Successfully Deleted!"
-    }, status=200)
-
-    
->>>>>>> 4f52224ce2652350c366229249fa9cce924f7732
+        }, status=200)
