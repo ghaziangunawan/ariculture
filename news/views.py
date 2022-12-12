@@ -12,6 +12,10 @@ from django.urls import reverse
 from news.models import Feedback
 from django.core import serializers
 from news.forms import FeedbackForm
+from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
+from news import models
+from django.http import JsonResponse
 
 
 def show_json(request):
@@ -53,3 +57,36 @@ def delete_task(request,id):
     task = Feedback.objects.filter(id =id)
     task.delete()
     return show_news(request)
+
+@csrf_exempt
+def delete_flutter(request,id):
+    task = Feedback.objects.filter(id =id)
+    task.delete()
+    return JsonResponse({
+              "status": True,
+              "message": "Successfully Registered!"
+                }, status=200)
+
+@csrf_exempt
+def save_review(request):
+    if request.method == 'POST':
+        var = User.objects.get(pk=request.user.id)
+        name = request.POST.get("name")
+        review = request.POST.get("review")
+        date = request.POST.get("date")
+        
+        models.Feedback.objects.create(
+            user=var,
+            name=name,
+            review=review,
+            date = date
+        )
+        return JsonResponse({
+              "status": True,
+              "message": "Successfully Registered!"
+                }, status=200)
+    else:
+         return JsonResponse({
+              "status": False,
+              "message": "Failed to Register."
+            }, status=401)
