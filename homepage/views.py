@@ -110,11 +110,13 @@ def save_ad_f(request):
             ad_type = ad_type,
             username = username
         )
-         return JsonResponse({
+        
+        print('test')
+        return JsonResponse({
               "status": True,
               "message": "Successfully Registered!"
                 }, status=200)
-     return JsonResponse({
+    return JsonResponse({
               "status": False,
               "message": "Failed to Register."
             }, status=401)
