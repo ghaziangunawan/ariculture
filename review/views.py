@@ -46,6 +46,7 @@ def show_json(request):
     data = Review.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
+
 @csrf_exempt
 def save_review(request):
     if request.method == 'POST':
