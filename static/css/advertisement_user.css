@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+h1 {
+    text-align: center;
+}
+.card:hover{
+    transform: scale(1.05);
+    backdrop-filter: blur(1rem);
+    box-shadow: 1.3rem 1.3rem 1.3rem rgba(0,0,0,0.5)
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+.btn-custom{
+    background-color: #212529 !important;
+}
+
+.btn {
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 16px;
+    color:#edf0f1;
+    text-decoration: none;
+}
+
+.bg-custom{
+    background: rgba(39, 39, 39, 0.6)
+}
+
+.glass{
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+body{
+    background-image: url(https://media.istockphoto.com/vectors/light-soft-green-triangular-geometric-background-vector-id906770278?k=20&m=906770278&s=612x612&w=0&h=n-VUXUTOIO_oVJelcijdt0jt8vsjlEdtfj3Oq5QDO0M=);
+    background-repeat: no-repeat; 
+    background-size: cover;
+
+}

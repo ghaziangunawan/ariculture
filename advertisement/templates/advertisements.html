@@ -1,163 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block meta %}
+<link rel="stylesheet" href="{% static '/css/advertisements.css' %}">
+{% endblock meta %}
 
 {% block content %}
-<body style="background-color: #CEC9D7;">
-    <style>
-            h1 {
-        text-align: left;
-    }
-    .card-img-top {
-    width: 100%;
-    height: 15vw;
-    object-fit: cover;
-    
-}
-.glass{
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border:1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-}
-
-.card:hover{
-    transform: scale(1.05);
-    backdrop-filter: blur(1rem);
-    box-shadow: 1.3rem 1.3rem 1.3rem rgba(0,0,0,0.5)
-    }
-
-    .background_home {
-  margin-top: -2vh;
-  background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0));
-  background-repeat: no-repeat;
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-}
-
-@keyframes backcolor{
-  100%{
-      background-position: 0 0;
-  }
-}
-.videobg{
-  position:absolute;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-}
-
-.header-row{
-    flex-basis:50%;
-     
-}
-
-#header-title{
-    font-size:100px;
-}
-
-button{
-    width:180px;
-    color:#000;
-    font-size: 12px;
-    padding:12px 0;
-    background:#fff;
-    border:0;
-    border-radius:20px;
-    outline: none;
-    margin-top:30px;
-}
-
-
-    </style>
+<body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            function create_card(Advertisement) {
-        if(Advertisement.fields.ad_type == "FARMLAND"){
-            return `
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="https://imageio.forbes.com/specials-images/imageserve/62be10f32ce37625d88bca9b/Tractor-spraying-pesticides-on-soybean-field--with-sprayer-at-spring/960x0.jpg?format=jpg&width=960" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">${Advertisement.fields.title}</h5>
-                    <p class="card-text">${Advertisement.fields.description}</p>
-                </div>
-                <div class="card-footer">
-                    <p class="card-text">By : ${Advertisement.fields.username}</p>
-                </div>
-            </div>
-        </div>
-        `
+    <script src="{% static 'js/advertisements.js' %}"></script>
 
-        }
-        else{
-            return `
+    <div class="background_home">
+        <video autoplay loop muted plays-inline class="videobg">
+            <source src="/static/img/videobg2.mp4" type="video/mp4">
+        </video>
+        <div class="row header-row">
             <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="https://oxfarm.co.ke/wp-content/uploads/2018/10/Fresh-produce.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">${Advertisement.fields.title}</h5>
-                        <p class="card-text">${Advertisement.fields.description}</p>
-                    </div>
-                    <div class="card-footer">
-                        <p class="card-text">By : ${Advertisement.fields.username} </p>
-                    </div>
-                </div>
+                <h1 id="header-title">Community.</h1>
+                <p>Here are some of our community farmlands and their products that our client chose to display.
+                    This section aims to help farmers advertise their lands and products to future buyers or investors to see.
+                </p>
+                <a href="#Ad"><button type="button">Explore</button></a>
             </div>
-        `
-        }
-        
-
-
-    };
-            function Add_Advertisement() {
-                $.get("/advertisement/json", function(data) {
-                    $.each(data, function(i, value) {
-                    $("#cardrow").append(create_card(value));
-
-                    });
-                })
-            };
-            Add_Advertisement();
-        });
-
-    </script>
-
-<div class="background_home">
-    <video autoplay loop muted plays-inline class="videobg">
-        <source src="/static/img/videobg2.mp4" type="video/mp4">
-    </video>
-    <div class="row header-row">
-        <div class="col">
-            <h1 id="header-title">Community.</h1>
-            <p> Here are some of our community farmlands and their products that our client chose to display.
-                This section aims to help farmers advertise their lands and products to future buyers or investors to see.
-            </p>
-            <a href="#Ad"><button type="button" >Explore </button></a>
         </div>
     </div>
-</div>
 
+    <div class="container glass mt-5 mb-5">
+        <h2>Hello {{username}},</h2>
+        <h2>Here are some of our community farmlands and products.</h2>
+    </div>
 
-<div class="container glass mt-5 mb-5" >
-    <h2>Hello {{username}}, </h2>
-    <h2>here are some of our community farmlands and products.</h2>
-</div>
-
-
-<div class="container glass" id="Ad">
-    <div class="row row-cols-md-3 g-4 mt-2 mb-2" id="cardrow" style="margin-left: 70px;"></div>
-</div>
-
-
+    <div class="container glass" id="Ad">
+        <div class="row row-cols-md-3 g-4 mt-2 mb-2" id="cardrow" style="margin-left: 70px;"></div>
+    </div>
 </body>
-
-
 {% endblock content %}

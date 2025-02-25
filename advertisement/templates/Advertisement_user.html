@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block meta %}
+<title>Advertisement User</title>
+<link rel="stylesheet" href="{% static 'css/advertisement_user.css' %}">
+{% endblock meta %}
+
+
+{% block content %}
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{% static 'js/advertisement_user.js' %}"></script>
+    <div class="container glass mt-5">
+        <h1>Hey {{username}}👋 Here are your advertisements !</h1>
+    </div>
+    <div class="container glass">
+        <div class="row row-cols-md-3 g-5 mt-2 mb-2" id="cardrow" style="margin-left: 70px;"></div>
+    </div>
+    <div class="container-fluid  fixed-bottom bg-dark" style="margin-top: 70px;">
+        <div class="col-md-12 text-center">
+            <button type="button" class="btn btn-custom text-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Create New Ad
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create A New Advertisement</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="" id="create_form">
+                        {% csrf_token %}
+                        <div class="container">
+                            <div class="row mt-5 mb-2">
+                                <tr>
+                                <td>Advertisement Title</td>
+                                <td><input type="text" name="title" placeholder="Enter Advertisement Title" class="form-control" id="Ad_title"></td>
+                                </tr>
+                                </div>   
+                                <div class="row mb-5">
+                                    <tr>
+                                    <td>Advertisement Description</td>
+                                    <td><input type="text" name="description" placeholder="Enter Advertisement Description" class="form-control" id="Ad_description"></td>
+                                </tr>
+                                </div>
+                                <div class="row mb-5">
+                                    <p> 
+                                        <label><input type="radio" name="ad_type" value="FARMLAND">Farmland</label> 
+                                        <label><input type="radio" name="ad_type" value="PRODUCT">Product</label>
+                                    </p>
+                                </div>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="modal_submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script src="{% static 'js/advertisement_user.js' %}"></script> -->
+
+{% endblock content %}
